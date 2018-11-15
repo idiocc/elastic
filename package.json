@@ -1,7 +1,7 @@
 {
   "name": "@idio/elastic",
   "version": "0.0.0",
-  "description": "Record Server Logs In Elastic Search.",
+  "description": "A Library To Manage Operations On ElasticSearch.",
   "main": "build",
   "scripts": {
     "t": "zoroaster -a",

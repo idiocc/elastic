@@ -2,7 +2,7 @@
 
 %NPM: @idio/elastic%
 
-`@idio/elastic` is Record Server Logs In Elastic Search.
+`@idio/elastic` Is A Library To Manage Operations On ElasticSearch.
 
 ```sh
 yarn add -E @idio/elastic

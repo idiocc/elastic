@@ -1,23 +1,24 @@
 ## API
 
-The package is available by importing its default function:
+The package is available by importing its components functions:
 
 ```js
-import elastic from '@idio/elastic'
+import { search } from '@idio/elastic'
 ```
 
 %~%
 
-```## elastic
+```## search
 [
-  ["arg1", "string"],
-  ["arg2?", "boolean"]
+  ["client", "Client"],
+  ["searchParams", "SearchParams"],
+  ["queryParams?", "Object"]
 ]
 ```
 
-Call this function to get the result you want.
+The wrapper around search to make a query based on a data object. Returns an empty array no no hits are found.
 
-%TYPEDEF types/index.xml%
+%TYPEDEF types/search.xml%
 
 %EXAMPLE: example/example.js, ../src => @idio/elastic%
 %FORK example example/example%

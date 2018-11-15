@@ -1,0 +1,4 @@
+<types>
+  <import name="Client" from="elasticsearch"/>
+  <import name="SearchParams" from="elasticsearch"/>
+</types>
