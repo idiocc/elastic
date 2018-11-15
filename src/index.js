@@ -1,21 +1,23 @@
 import { debuglog } from 'util'
+import { makeQuery } from './make-query'
 
 const LOG = debuglog('@idio/elastic')
 
 /**
- * Record Server Logs In Elastic Search.
- * @param {Config} [config] Options for the program.
- * @param {boolean} [config.shouldRun=true] A boolean option. Default `true`.
- * @param {string} config.text A text to return.
+ * The wrapper around search to make a query based on a data object. Returns an empty array no no hits are found.
+ * @param {import('elasticsearch').Client} client The elastic client.
+ * @param {import('elasticsearch').SearchParams} searchParams The search method parameters, such as index, type.
+ * @param {Object} [queryParams] The params for search terms.
  */
-export default async function elastic(config = {}) {
-  const {
-    shouldRun = true,
-    text,
-  } = config
-  if (!shouldRun) return
-  LOG('@idio/elastic called with %s', text)
-  return text
+export const search = async (client, searchParams, queryParams = {}) => {
+  const q = makeQuery(queryParams)
+  const res = await client.search({
+    ...searchParams,
+    q,
+  })
+  const { hits: { hits, total } } = res
+  if (!total) return []
+  return hits
 }
 
 /* documentary types/index.xml */

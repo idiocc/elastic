@@ -1,22 +1,41 @@
-import { equal, ok } from 'zoroaster/assert'
-import Context from '../context'
-import elastic from '../../src'
+import { equal, deepEqual } from 'zoroaster/assert'
+import { search } from '../../src'
+import SearchClient from '../context/search-client'
 
-/** @type {Object.<string, (c: Context)>} */
-const T = {
-  context: Context,
+/** @type {Object.<string, (c: SearchClient)>} */
+export const Search = {
+  context: SearchClient,
   'is a function'() {
-    equal(typeof elastic, 'function')
+    equal(typeof search, 'function')
   },
-  async 'calls package without error'() {
-    await elastic()
+  async 'searches without params'({ client, hits, getSearch }) {
+    const index = 'test'
+    const type = 'user'
+    const Res = await search(client, { index, type })
+    deepEqual(Res, hits)
+
+    const { q, ...rest } = getSearch()
+    equal(q, '')
+    deepEqual(rest, { index, type })
   },
-  async 'gets a link to the fixture'({ FIXTURE }) {
-    const res = await elastic({
-      text: FIXTURE,
-    })
-    ok(res, FIXTURE)
+  async 'searches with params'({ client, hits, getSearch }) {
+    const index = 'test'
+    const type = 'user'
+    const Res = await search(client, { index, type }, { field: 'test' })
+    deepEqual(Res, hits)
+
+    const { q, ...rest } = getSearch()
+    equal(q, 'field:test')
+    deepEqual(rest, { index, type })
+  },
+  async 'searches with multiple params'({ client, hits, getSearch }) {
+    const index = 'test'
+    const type = 'user'
+    const Res = await search(client, { index, type }, { field: 'test', field2: 'giraffe' })
+    deepEqual(Res, hits)
+
+    const { q, ...rest } = getSearch()
+    equal(q, 'field:test,field2:giraffe')
+    deepEqual(rest, { index, type })
   },
 }
-
-export default T
