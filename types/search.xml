@@ -1,4 +1,18 @@
 <types>
   <import name="Client" from="elasticsearch"/>
   <import name="SearchParams" from="elasticsearch"/>
+  <type name="Hit">
+    <prop string name="_id">`DQn4JC6q5zZQsgv5KNhiWlgd`</prop>
+    <prop string name="_index">`idio-example`</prop>
+    <prop number name="_score">`1`</prop>
+    <prop name="_source">`Object {name: "example", user: "idio"}`</prop>
+    <prop string name="_type">`doc`</prop>
+    <prop opt number name="_version"/>
+    <prop opt type="Explanation" name="_explanation"/>
+    <prop opt name="fields"/>
+    <prop opt name="highlight"/>
+    <prop opt name="inner_hits"/>
+    <prop opt type="string[]" name="matched_queries"/>
+    <prop opt type="string[]" name="sort"/>
+  </type>
 </types>

@@ -8,7 +8,7 @@ import { search } from '@idio/elastic'
 
 %~%
 
-```## search
+```## async search => Hits[]
 [
   ["client", "Client"],
   ["searchParams", "SearchParams"],
