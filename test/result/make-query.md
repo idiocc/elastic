@@ -14,5 +14,5 @@ query:search
 }
 
 /* expected */
-query:search,test:mask
+query:search AND test:mask
 /**/

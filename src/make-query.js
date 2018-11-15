@@ -7,6 +7,6 @@ export const makeQuery = (params) => {
   const q = Object.keys(params).map((k) => {
     const s = getField(k, params[k])
     return s
-  }).join(',')
+  }).join(' AND ')
   return q
 }

@@ -1,5 +1,6 @@
 const { debuglog } = require('util');
 const { makeQuery } = require('./make-query');
+let erotic = require('erotic'); if (erotic && erotic.__esModule) erotic = erotic.default;
 
 const LOG = debuglog('@idio/elastic')
 
@@ -11,14 +12,21 @@ const LOG = debuglog('@idio/elastic')
  * @param {Object} [queryParams] The params for search terms.
  */
        const search = async (client, searchParams, queryParams = {}) => {
+  const er = erotic(true)
   const q = makeQuery(queryParams)
-  const res = await client.search({
-    ...searchParams,
-    q,
-  })
-  const { hits: { hits, total } } = res
-  if (!total) return []
-  return hits
+  try {
+    LOG(q)
+    const res = await client.search({
+      ...searchParams,
+      q,
+    })
+    const { hits: { hits, total } } = res
+    if (!total) return []
+    return hits
+  } catch (err) {
+    er(err)
+    throw err
+  }
 }
 
 /* documentary types/search.xml */

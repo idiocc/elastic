@@ -1,5 +1,6 @@
 import { debuglog } from 'util'
 import { makeQuery } from './make-query'
+import erotic from 'erotic'
 
 const LOG = debuglog('@idio/elastic')
 
@@ -11,14 +12,21 @@ const LOG = debuglog('@idio/elastic')
  * @param {Object} [queryParams] The params for search terms.
  */
 export const search = async (client, searchParams, queryParams = {}) => {
+  const er = erotic(true)
   const q = makeQuery(queryParams)
-  const res = await client.search({
-    ...searchParams,
-    q,
-  })
-  const { hits: { hits, total } } = res
-  if (!total) return []
-  return hits
+  try {
+    LOG(q)
+    const res = await client.search({
+      ...searchParams,
+      q,
+    })
+    const { hits: { hits, total } } = res
+    if (!total) return []
+    return hits
+  } catch (err) {
+    er(err)
+    throw err
+  }
 }
 
 /* documentary types/search.xml */

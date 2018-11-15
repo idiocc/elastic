@@ -35,7 +35,7 @@ export const Search = {
     deepEqual(Res, hits)
 
     const { q, ...rest } = getSearch()
-    equal(q, 'field:test,field2:giraffe')
+    equal(q, 'field:test AND field2:giraffe')
     deepEqual(rest, { index, type })
   },
 }

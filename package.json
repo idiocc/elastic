@@ -45,6 +45,7 @@
     "zoroaster": "3.6.6"
   },
   "dependencies": {
-    "elasticsearch": "15.2.0"
+    "elasticsearch": "15.2.0",
+    "erotic": "2.0.1"
   }
 }
