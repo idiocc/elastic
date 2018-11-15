@@ -1,6 +1,6 @@
 {
   "name": "@idio/elastic",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Library To Manage Operations On ElasticSearch.",
   "main": "build",
   "scripts": {
